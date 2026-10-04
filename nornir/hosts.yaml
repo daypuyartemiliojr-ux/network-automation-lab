@@ -1,0 +1,63 @@
+F1:
+  hostname: 10.255.12.5
+  platform: cisco_iosxe
+  username: admin
+  password: C1sc0123
+  groups:
+    - cisco
+
+S1:
+  hostname: 10.255.12.6
+  platform: cisco_iosxe
+  username: admin
+  password: C1sc0123
+  groups:
+    - cisco
+
+S2:
+  hostname: 10.255.12.102
+  platform: cisco_iosxe
+  username: admin
+  password: C1sc0123
+  groups:
+    - cisco
+
+S3:
+  hostname: 10.255.13.26
+  platform: cisco_iosxe
+  username: admin
+  password: C1sc0123
+  groups:
+    - cisco
+
+S4:
+  hostname: 10.255.12.22
+  platform: cisco_iosxe
+  username: admin
+  password: C1sc0123
+  groups:
+    - cisco
+
+E1:
+  hostname: 10.255.12.13
+  platform: cisco_iosxe
+  username: admin
+  password: C1sc0123
+  groups:
+    - cisco
+
+R1:
+  hostname: 10.255.12.14
+  platform: cisco_iosxe
+  username: admin
+  password: C1sc0123
+  groups:
+    - cisco
+
+C1:
+  hostname: 192.168.199.10
+  platform: cisco_iosxe
+  username: admin
+  password: C1sc0123
+  groups:
+    - cisco

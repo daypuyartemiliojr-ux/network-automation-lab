@@ -1,0 +1,16 @@
+---
+- name: Backup Configuration
+  hosts: cisco_devices
+  gather_facts: no
+
+  tasks:
+    - name: Run show running-config
+      cisco.ios.ios_command:
+        commands:
+          - show running-config
+      register: output
+
+    - name: Save backup to file
+      copy:
+        content: "{{ output.stdout[0] }}"
+        dest: "/home/automation/backups/{{ inventory_hostname }}_config.txt"

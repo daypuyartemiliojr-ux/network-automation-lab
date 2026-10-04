@@ -1,0 +1,1214 @@
+[1m[36mbackup_config*******************************************************************[0m
+[0m[1m[34m* C1 ** changed : False ********************************************************[0m
+[0m[1m[32mvvvv backup_config ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO[0m
+[0mSaved to /home/automation/backups/C1_nornir_20261004_101224.txt[0m
+[0m[1m[32m---- send_command ** changed : False ------------------------------------------- INFO[0m
+[0mBuilding configuration...
+
+Current configuration : 2314 bytes
+!
+! Last configuration change at 09:07:10 CET Sun Oct 4 2026
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname C1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+username admin privilege 15 secret 5 $1$M262$Wd7ECCssVDcevztwLXdJI.
+username automation privilege 15 secret 5 $1$IekR$ntTsJ5.K9vWmHIvMFle7t.
+no aaa new-model
+clock timezone CET 1 0
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+ip domain-name lab.local
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ no switchport
+ ip address 192.168.199.10 255.255.255.0
+!
+interface Ethernet0/1
+ no switchport
+ ip address 10.255.12.101 255.255.255.252
+!
+interface Ethernet0/2
+ no switchport
+ ip address 10.255.12.9 255.255.255.252
+!
+interface Ethernet0/3
+ no switchport
+ ip address 10.255.12.1 255.255.255.252
+!
+router ospf 1
+ network 10.255.12.0 0.0.0.3 area 0
+ network 10.255.12.8 0.0.0.3 area 0
+ network 10.255.12.100 0.0.0.3 area 0
+ network 10.255.13.0 0.0.0.255 area 0
+ network 192.168.199.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 10.255.13.0 255.255.255.0 10.255.12.5
+ip route 10.255.13.0 255.255.255.0 10.255.12.2
+ip route 10.255.13.0 255.255.255.240 10.255.12.5
+ip ssh authentication-retries 5
+ip ssh version 2
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm authentication password
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+banner login ^C
+***********************************************
+* WARNING: Authorized Personnel Only!         *
+* RIVAN CYBER INSTITUTE - NetAuto Lab         *
+* All activity is monitored and logged.       *
+***********************************************
+^C
+alias exec bp show ip int brief | ex una
+alias exec sr show ip route
+alias exec cn show cdp nei
+alias exec sp show ip protocols
+alias exec bp6 show ipv6 int brief | exc down
+alias exec sr6 show ipv6 route
+alias exec sbs6 show bgp ipv6 summ
+alias exec sc show run | sec
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password C1sc0123
+ login local
+ transport input ssh
+!
+!
+!
+end[0m
+[0m[1m[32m^^^^ END backup_config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[34m* E1 ** changed : False ********************************************************[0m
+[0m[1m[32mvvvv backup_config ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO[0m
+[0mSaved to /home/automation/backups/E1_nornir_20261004_101224.txt[0m
+[0m[1m[32m---- send_command ** changed : False ------------------------------------------- INFO[0m
+[0mBuilding configuration...
+
+
+Current configuration : 1990 bytes
+!
+! Last configuration change at 09:01:58 CET Sun Oct 4 2026
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname E1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+clock timezone CET 1 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$B9FJ$sKhazP7Gcwq.cQBU1rlpD.
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.255.12.10 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ ip address 10.255.12.13 255.255.255.252
+ duplex auto
+ mpls ip
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+router ospf 1
+ network 10.255.12.0 0.0.0.3 area 0
+ network 10.255.12.8 0.0.0.3 area 0
+ network 10.255.12.12 0.0.0.3 area 0
+ network 10.255.12.16 0.0.0.3 area 0
+ network 10.255.12.24 0.0.0.3 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.255.12.9
+ip route 0.0.0.0 0.0.0.0 10.255.13.1
+ip ssh authentication-retries 5
+ip ssh version 2
+ip ssh server algorithm authentication password
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+alias exec bp show ip int brief | ex una
+alias exec sr show ip route
+alias exec cn show cdp nei
+alias exec sp show ip protocols
+alias exec bp6 show ipv6 int brief | exc down
+alias exec sr6 show ipv6 route
+alias exec sbs6 show bgp ipv6 summ
+alias exec sc show run | sec
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password C1sc0123
+ login local
+ transport input ssh
+!
+ntp server 34.202.215.187
+ntp server pool.ntp.org
+!
+pnp profile pnp_cco_profile
+ transport https ipv4 52.203.231.173 port 443
+!
+end[0m
+[0m[1m[32m^^^^ END backup_config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[34m* F1 ** changed : False ********************************************************[0m
+[0m[1m[32mvvvv backup_config ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO[0m
+[0mSaved to /home/automation/backups/F1_nornir_20261004_101224.txt[0m
+[0m[1m[32m---- send_command ** changed : False ------------------------------------------- INFO[0m
+[0mBuilding configuration...
+
+
+Current configuration : 1999 bytes
+!
+! Last configuration change at 07:22:43 CET Sun Oct 4 2026
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname F1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+clock timezone CET 1 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$K1hm$d97s/wSlqBHndsQeVIZlP0
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.255.12.5 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ ip address 10.255.12.2 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/2
+ ip address 10.255.13.1 255.255.255.240
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+router ospf 1
+ network 10.255.12.0 0.0.0.3 area 0
+ network 10.255.12.4 0.0.0.3 area 0
+ network 10.255.12.8 0.0.0.3 area 0
+ network 10.255.13.0 0.0.0.15 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.255.12.9
+ip route 10.255.13.24 255.255.255.252 10.255.13.22
+ip route 192.168.199.0 255.255.255.0 10.255.12.1
+ip ssh authentication-retries 5
+ip ssh version 2
+ip ssh server algorithm mac hmac-sha2-256 hmac-sha2-512
+ip ssh server algorithm authentication password
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+alias exec bp show ip int brief | ex una
+alias exec sr show ip route
+alias exec cn show cdp nei
+alias exec sp show ip protocols
+alias exec bp6 show ipv6 int brief | exc down
+alias exec sr6 show ipv6 route
+alias exec sbs6 show bgp ipv6 summ
+alias exec sc show run | sec
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password C1sc0123
+ login local
+ transport input ssh
+!
+ntp server 34.208.249.133
+ntp server pool.ntp.org
+!
+end[0m
+[0m[1m[32m^^^^ END backup_config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[34m* R1 ** changed : False ********************************************************[0m
+[0m[1m[32mvvvv backup_config ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO[0m
+[0mSaved to /home/automation/backups/R1_nornir_20261004_101224.txt[0m
+[0m[1m[32m---- send_command ** changed : False ------------------------------------------- INFO[0m
+[0mBuilding configuration...
+
+
+Current configuration : 1765 bytes
+!
+! Last configuration change at 09:06:17 CET Sun Oct 4 2026
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+clock timezone CET 1 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$EhLN$HNFO.rDmv9hBHsUUYg6PT0
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.255.12.14 255.255.255.252
+ duplex auto
+ mpls ip
+!
+interface Ethernet0/1
+ ip address 10.255.12.18 255.255.255.252
+ duplex auto
+ mpls ip
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+router ospf 1
+ network 10.255.12.12 0.0.0.3 area 0
+ network 10.255.12.16 0.0.0.3 area 0
+ network 10.255.12.20 0.0.0.3 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.255.12.10
+ip ssh authentication-retries 5
+ip ssh version 2
+ip ssh server algorithm authentication password
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+alias exec bp show ip int brief | ex una
+alias exec sr show ip route
+alias exec cn show cdp nei
+alias exec sp show ip protocols
+alias exec bp6 show ipv6 int brief | exc down
+alias exec sr6 show ipv6 route
+alias exec sbs6 show bgp ipv6 summ
+alias exec sc show run | sec
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password C1sc0123
+ login local
+ transport input ssh
+!
+!
+end[0m
+[0m[1m[32m^^^^ END backup_config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[34m* S1 ** changed : False ********************************************************[0m
+[0m[1m[32mvvvv backup_config ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO[0m
+[0mSaved to /home/automation/backups/S1_nornir_20261004_101224.txt[0m
+[0m[1m[32m---- send_command ** changed : False ------------------------------------------- INFO[0m
+[0mBuilding configuration...
+
+
+Current configuration : 1541 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname S1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+clock timezone CET 1 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$bTSI$QoIn1y.Ln143n.Sdb4aG91
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.255.12.6 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.255.12.5
+ip ssh authentication-retries 5
+ip ssh version 2
+ip ssh server algorithm authentication password
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+alias exec bp show ip int brief | ex una
+alias exec sr show ip route
+alias exec cn show cdp nei
+alias exec sp show ip protocols
+alias exec bp6 show ipv6 int brief | exc down
+alias exec sr6 show ipv6 route
+alias exec sbs6 show bgp ipv6 summ
+alias exec sc show run | sec
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password C1sc0123
+ login local
+ transport input ssh
+!
+!
+end[0m
+[0m[1m[32m^^^^ END backup_config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[34m* S2 ** changed : False ********************************************************[0m
+[0m[1m[32mvvvv backup_config ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO[0m
+[0mSaved to /home/automation/backups/S2_nornir_20261004_101224.txt[0m
+[0m[1m[32m---- send_command ** changed : False ------------------------------------------- INFO[0m
+[0mBuilding configuration...
+
+
+Current configuration : 1671 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname S2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+clock timezone CET 1 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$Mnia$Dcd3CHBDrh.CQgGuqBpC8/
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.255.12.102 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.255.12.101
+ip ssh authentication-retries 5
+ip ssh version 2
+ip ssh server algorithm authentication password
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+alias exec bp show ip int brief | ex una
+alias exec sr show ip route
+alias exec cn show cdp nei
+alias exec sp show ip protocols
+alias exec bp6 show ipv6 int brief | exc down
+alias exec sr6 show ipv6 route
+alias exec sbs6 show bgp ipv6 summ
+alias exec sc show run | sec
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password C1sc0123
+ login local
+ transport input ssh
+!
+ntp server 34.208.249.133
+ntp server pool.ntp.org
+!
+pnp profile pnp_cco_profile
+ transport https ipv4 52.205.197.159 port 443
+!
+end[0m
+[0m[1m[32m^^^^ END backup_config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[34m* S3 ** changed : False ********************************************************[0m
+[0m[1m[32mvvvv backup_config ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO[0m
+[0mSaved to /home/automation/backups/S3_nornir_20261004_101224.txt[0m
+[0m[1m[32m---- send_command ** changed : False ------------------------------------------- INFO[0m
+[0mBuilding configuration...
+
+
+Current configuration : 1543 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname S3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+clock timezone CET 1 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$t1b9$ag07iMcCyekDicxqRbtdo.
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.255.13.26 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.255.13.25
+ip ssh authentication-retries 5
+ip ssh version 2
+ip ssh server algorithm authentication password
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+alias exec bp show ip int brief | ex una
+alias exec sr show ip route
+alias exec cn show cdp nei
+alias exec sp show ip protocols
+alias exec bp6 show ipv6 int brief | exc down
+alias exec sr6 show ipv6 route
+alias exec sbs6 show bgp ipv6 summ
+alias exec sc show run | sec
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password C1sc0123
+ login local
+ transport input ssh
+!
+!
+end[0m
+[0m[1m[32m^^^^ END backup_config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m[1m[34m* S4 ** changed : False ********************************************************[0m
+[0m[1m[32mvvvv backup_config ** changed : False vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv INFO[0m
+[0mSaved to /home/automation/backups/S4_nornir_20261004_101224.txt[0m
+[0m[1m[32m---- send_command ** changed : False ------------------------------------------- INFO[0m
+[0mBuilding configuration...
+
+
+Current configuration : 1634 bytes
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname S4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+no logging console
+!
+no aaa new-model
+!
+!
+!
+clock timezone CET 1 0
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip domain name lab.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$gm3/$s2qKJCprFEHvS6kyoJdGp0
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.255.12.22 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/1
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+router ospf 1
+ network 10.255.12.20 0.0.0.3 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 10.255.12.25
+ip route 0.0.0.0 0.0.0.0 10.255.12.21
+ip ssh authentication-retries 5
+ip ssh version 2
+ip ssh server algorithm authentication password
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+alias exec bp show ip int brief | ex una
+alias exec sr show ip route
+alias exec cn show cdp nei
+alias exec sp show ip protocols
+alias exec bp6 show ipv6 int brief | exc down
+alias exec sr6 show ipv6 route
+alias exec sbs6 show bgp ipv6 summ
+alias exec sc show run | sec
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 0 0
+ password C1sc0123
+ login local
+ transport input ssh
+!
+!
+end[0m
+[0m[1m[32m^^^^ END backup_config ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m

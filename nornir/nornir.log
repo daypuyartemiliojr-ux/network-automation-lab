@@ -1,0 +1,11 @@
+2026-10-04 09:52:38,058 -  nornir.core -     INFO -        run() - Running task 'send_command' with args {'command': 'show ip interface brief'} on 8 hosts
+2026-10-04 10:07:34,124 -  nornir.core -     INFO -        run() - Running task 'backup_config' with args {} on 8 hosts
+2026-10-04 10:10:43,932 -  nornir.core -     INFO -        run() - Running task 'backup_config' with args {} on 8 hosts
+2026-10-04 10:12:24,665 -  nornir.core -     INFO -        run() - Running task 'backup_config' with args {} on 8 hosts
+2026-10-04 10:15:32,330 -  nornir.core -     INFO -        run() - Running task 'check_ssh_version' with args {} on 8 hosts
+2026-10-04 10:15:33,449 -  nornir.core -     INFO -        run() - Running task 'check_ntp' with args {} on 8 hosts
+2026-10-04 10:15:33,565 -  nornir.core -     INFO -        run() - Running task 'check_ospf' with args {} on 8 hosts
+2026-10-04 10:19:19,870 -  nornir.core -     INFO -        run() - Running task 'check_interfaces' with args {} on 8 hosts
+2026-10-04 10:22:11,609 -  nornir.core -     INFO -        run() - Running task 'check_routing' with args {} on 8 hosts
+2026-10-04 10:25:35,761 -  nornir.core -     INFO -        run() - Running task 'collect_inventory' with args {} on 8 hosts
+2026-10-04 10:30:48,563 -  nornir.core -     INFO -        run() - Running task 'collect_inventory' with args {} on 8 hosts

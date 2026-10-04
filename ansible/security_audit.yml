@@ -1,0 +1,30 @@
+---
+- name: Security Audit
+  hosts: cisco_devices
+  gather_facts: no
+
+  tasks:
+    - name: Check SSH version
+      cisco.ios.ios_command:
+        commands:
+          - show ip ssh
+      register: ssh_output
+
+    - name: Check ACLs
+      cisco.ios.ios_command:
+        commands:
+          - show ip access-lists
+      register: acl_output
+
+    - name: Check enable secret
+      cisco.ios.ios_command:
+        commands:
+          - show running-config | include enable secret
+      register: enable_output
+
+    - name: Display security audit results
+      debug:
+        msg:
+          - "SSH: {{ ssh_output.stdout[0] }}"
+          - "ACLs: {{ acl_output.stdout[0] }}"
+          - "Enable Secret: {{ enable_output.stdout[0] }}"

@@ -1,0 +1,15 @@
+---
+- name: Show IP Interface Brief
+  hosts: cisco_devices
+  gather_facts: no
+
+  tasks:
+    - name: Run show ip interface brief
+      cisco.ios.ios_command:
+        commands:
+          - show ip interface brief
+      register: output
+
+    - name: Display output
+      debug:
+        msg: "{{ output.stdout_lines }}"
