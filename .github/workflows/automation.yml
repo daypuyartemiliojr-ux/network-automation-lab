@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  automation:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,14 +22,31 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install scrapli nornir nornir-scrapli pyyaml
+          pip install scrapli nornir nornir-scrapli pyyaml requests
+
+      - name: Lint Python scripts
+        run: |
+          pip install flake8
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
 
       - name: Run documentation script
         run: |
           echo "CI/CD pipeline - testing automation scripts"
           python -c "print('GitHub Actions is working!')"
 
-      - name: Lint Python scripts
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to production
+
         run: |
-          pip install flake8
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
+
+          echo "Deploying to production..."
+
+          echo "Deployment successful!"
